@@ -21,6 +21,8 @@ function login(username, password) {
 
     return fetch('https://localhost:5001/v1/auth/login', requestOptions)
         .then(handleResponse)
+        .then(response => response.text())
+        .then(text => JSON.parse(text))
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify(user));
